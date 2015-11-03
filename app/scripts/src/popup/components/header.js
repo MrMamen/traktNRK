@@ -7,7 +7,7 @@ module.exports = React.createClass({
     return(
       <header className='mdl-layout__header mdl-shadow--7dp'>
         <div className='mdl-layout__header-row'>
-          <span className='mdl-layout-title'>traktflix</span>
+          <span className='mdl-layout-title'>traktNRK</span>
           <div className='mdl-layout-spacer'></div>
           <nav className='mdl-navigation'>
             {

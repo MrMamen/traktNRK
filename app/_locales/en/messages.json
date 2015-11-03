@@ -1,14 +1,14 @@
 {
   "appName": {
-    "message": "Traktflix - Netflix and Trakt.tv together",
-    "description": "Trakt.tv and Netflix integration"
+    "message": "TraktNRK - NRK and Trakt.tv together",
+    "description": "Trakt.tv and NRK Web TV integration"
   },
   "appDescription": {
-    "message": "Sync Netflix history to Trakt.tv",
-    "description": "Automatically sync watched movies and shows on Netflix to Trakt.tv"
+    "message": "Sync NRK history to Trakt.tv",
+    "description": "Automatically sync watched movies and shows on NRK to Trakt.tv"
   },
   "appShortName": {
-    "message": "traktflix",
-    "description": "Trakt.tv and Netflix integration"
+    "message": "TraktNRK",
+    "description": "Trakt.tv and NRK integration"
   }
 }

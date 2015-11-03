@@ -5,33 +5,38 @@ var Item = require('./item.js');
 function ItemParser() {}
 
 ItemParser.isReady = function checkPage() {
-  var scrubber = document.querySelector('.player-scrubber-progress-completed');
-  return scrubber !== null;
+  var player = document.getElementById("flashPlayer"); //Currently Chrome only supports the flashplayer
+  return player !== null && player["JSgetDuration"] !== undefined;
 };
 
 ItemParser.parse = function parse(callback) {
   var item;
-  var scrubber = document.querySelector('.player-scrubber-progress-completed');
-  var playerStatus = document.querySelectorAll('.player-status span');
-  var type = playerStatus.length > 1 ? 'show' : 'movie';
-  var mainTitle = playerStatus[0].textContent;
+  var player = document.getElementById("flashPlayer");
+  var progress = player["JSgetCurrentPosition"];
+  var duration = player["JSgetDuration"];
+  var type = document.querySelector("meta[name=type]").getAttribute("content") == 'episode' ? 'show' : 'movie';
+  var mainTitle = document.querySelector("meta[name=title]").getAttribute("content");
 
   if (type === 'show') {
-    var episode = playerStatus[1].textContent.match(/\d+/g);
-    var season = episode[0];
-    var number = episode[1];
-    var title = playerStatus[2].textContent;
+    var uri = document.querySelector("li.episode-item.active a").getAttribute("href");
+    if (uri.split("/")[4].substring(0,6) !== "sesong"){
+      return;
+    }
+    var season = uri.split("/")[4].slice(7);
+    var number = document.querySelector("meta[name=episodenumber]").getAttribute("content");
+    var title = document.querySelector("meta[name=seriestitle]").getAttribute("content");
 
     item = new Item({
-      epTitle: title,
-      scrubber: scrubber,
-      title: mainTitle,
+      epTitle: mainTitle,
+      progress: progress,
+      duration: duration,
+      title: title,
       season: season,
       episode: number,
       type: type
     });
   } else {
-    item = new Item({ scrubber: scrubber, title: mainTitle, type: type });
+    item = new Item({ progress: progress, duration: duration, title: mainTitle, type: type });
   }
 
   callback.call(this, item);

@@ -4,7 +4,7 @@ var Scrobble = require('../../app/scripts/src/content/scrobble.js');
 var Search = require('../../app/scripts/src/content/search.js');
 var controller = new ContentController();
 var response = { movie: { title: 'Rocky' } };
-var item = { type: 'movie', title: 'Rocky', getScrubber: sinon.stub() };
+var item = { type: 'movie', title: 'Rocky', getProgress: sinon.stub() };
 var scrobble = new Scrobble({ response: response, type: 'movie' });
 controller.item = item;
 
@@ -122,7 +122,7 @@ describe('ContentController', function() {
 
   it('getCurrentItem returns episode object', function() {
     var response = { episode: { title: 'Chapter 31' } };
-    var item = { type: 'show', title: 'Chapter 31', getScrubber: sinon.stub() };
+    var item = { type: 'show', title: 'Chapter 31', getProgress: sinon.stub() };
     var scrobble = new Scrobble({ response: response, type: 'episode' });
     controller.scrobble = scrobble;
     controller.item = item;

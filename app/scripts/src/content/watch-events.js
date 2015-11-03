@@ -33,6 +33,7 @@ WatchEvents.prototype = {
   },
 
   addStopListener: function() {
+    //window.onpopstate = this.onStop;
     window.onbeforeunload = function() {
       this.onStop();
       this.stopListeners();
@@ -53,18 +54,15 @@ WatchEvents.prototype = {
   },
 
   onClick: function(e) {
-    if (e.target.classList.contains('player-play-pause')) {
-      if (e.target.classList.contains('play')) {
-        this.onPlay(e);
-      } else if (e.target.classList.contains('pause')) {
-        this.onPause(e);
-      }
-    } else if (e.target.className === 'player-scrubber-target' ||
-        e.target.className === 'player-scrubber-progress-completed' ||
-        e.target.className === 'player-scrubber-progress-buffered' ||
-        e.target.className === 'player-scrubber-progress' ||
-        e.target.className === 'player-scrubber horizontal') {
+    if (e.target.classList.contains('play')) {
+      //Unfortinately the click event is not detected when pressing the player (due to flash)
       this.isPlaying() ? this.onPlay(e) : this.onPause(e);
+    } else if (e.target.classList.contains('indexpoint-link')) {
+      this.onStop(e);
+      var self = this;
+      setTimeout(function() {
+        self.onPlay(e);
+      }, 1500);
     }
   },
 
@@ -86,16 +84,9 @@ WatchEvents.prototype = {
         But the HTML of the player gets updated before this function is called,
         this way the correct approach is invert the conditions */
       case KEY_SPACE:
-        this.isPlaying() ? this.onPlay(e) : this.onPause(e);
-        break;
-      case KEY_ENTER:
-        this.isPlaying() ? this.onPlay(e) : this.onPause(e);
-        break;
       case KEY_LEFT_ARROW:
-        this.onPause(e);
-        break;
       case KEY_RIGHT_ARROW:
-        this.onPause(e);
+        this.isPlaying() ? this.onPlay(e) : this.onPause(e);
         break;
     }
   },
@@ -118,8 +109,12 @@ WatchEvents.prototype = {
   },
 
   isPlaying: function() {
-    var playPause = this.document.querySelector('.player-play-pause');
-    return playPause && playPause.classList.contains('pause');
+    var player = document.getElementById("flashPlayer");
+    var dur = player["JSgetCurrentPosition"]();
+    for (var i = 0; i < 100 && dur == player["JSgetCurrentPosition"](); i++){
+      //Just to pass some time to see if there is any progress
+    }
+    return dur !== player["JSgetCurrentPosition"]()
   }
 };
 

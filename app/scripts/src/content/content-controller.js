@@ -8,7 +8,7 @@ function ContentController() {
   this.item = null;
   this.scrobble = undefined;
 
-  if (location.href.match(/watch/)) {
+  if (location.href.match(/serie/) || location.href.match(/program/)) {
     ItemParser.start(this.storeItem.bind(this));
   }
 };
@@ -20,7 +20,7 @@ ContentController.prototype = {
     this.scrobble = new Scrobble({
       response: response,
       type: this.item.type,
-      scrubber: this.item.getScrubber.bind(this.item),
+      scrubber: this.item.getProgress.bind(this.item),
       success: this.onScrobbleSuccess.bind(this),
       error: this.onScrobbleError.bind(this)
     });

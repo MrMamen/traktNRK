@@ -12,7 +12,7 @@ chrome.runtime.onInstalled.addListener(function() {
     chrome.declarativeContent.onPageChanged.addRules([{
       conditions: [
         new chrome.declarativeContent.PageStateMatcher({
-          pageUrl: { hostSuffix: 'netflix.com' }
+          pageUrl: { hostSuffix: 'nrk.no' }
         })
       ],
       actions: [new chrome.declarativeContent.ShowPageAction()]

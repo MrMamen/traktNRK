@@ -45,7 +45,7 @@
         "unlimitedStorage",
         "http://trakt.tv/*",
         "https://www.google-analytics.com/",
-        "*://*.nrk.no/*"
+        "*://tv.nrk.no/*"
     ],
     "web_accessible_resources": [
         "images/svg/*.svg"

@@ -1,10 +1,8 @@
 'use strict';
 
-/* This was necessary to priorize Star Wars: The Clone Wars (2008) over Star Wars: Clone Wars (2003).
-  I left this object because it could be useful for other movies/shows */
+/* A way to fix translation issues with NRK-titles and trakt-titles */
 var fullTitles = {
-  'Star Wars: The Clone Wars': '"Star Wars: The Clone Wars"',
-  'The Office (U.S.)': 'The Office (US)'
+  'Broen': 'The Bridge'
 }
 
 function Item(options) {

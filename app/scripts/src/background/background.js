@@ -3,7 +3,7 @@
 var Analytics = require('./analytics.js');
 var Oauth = require('../oauth.js');
 var Settings = require('../settings.js');
-var service = analytics.getService('traktflix');
+var service = analytics.getService('traktNRK');
 var tracker = service.getTracker(Settings.analyticsId);
 Analytics.setTracker(tracker);
 

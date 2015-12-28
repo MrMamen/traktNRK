@@ -2,7 +2,9 @@
 
 /* A way to fix translation issues with NRK-titles and trakt-titles */
 var fullTitles = {
-  'Broen': 'The Bridge'
+  'Broen': 'The Bridge',
+  'Kampen om tungtvannet': 'the heavy water wars',
+  'Tyskland 83': 'Deutschland 83'
 }
 
 function Item(options) {

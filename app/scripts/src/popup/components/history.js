@@ -24,9 +24,9 @@ module.exports = React.createClass({
         </div>
 
         <div className='mdl-card__supporting-text'>
-          Note: this is currently in beta, please report any issues.
+          In a future version it may be possible to sync the NRK history with trakt history.
         </div>
-
+        {/*
         <label htmlFor='autoSync' className='mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect'>
           <input onChange={this.onAutoSyncChanged} type='checkbox' id='autoSync' className='mdl-checkbox__input' checked={this.props.autoSync} />
           <span className='mdl-checkbox__label'>Automatically sync in background</span>
@@ -35,6 +35,7 @@ module.exports = React.createClass({
         <button onClick={this.props.onSyncNowClicked} className='mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect'>
           Sync Now
         </button>
+        */}
       </div>
     );
   }

@@ -79,7 +79,7 @@ module.exports = React.createClass({
   onTokenFailed: function(status, response) {
     this.setState({ loading: false });
     chrome.runtime.sendMessage({ type: 'sendEvent', name: 'TokenFailed', value: false });
-    console.error('traktflix: Get Token failed', status, response);
+    console.error('traktNRK: Get Token failed', status, response);
   },
   onAutoSyncChanged: function(e) {
     this.setState({ autoSync: e.target.checked });
@@ -100,7 +100,7 @@ module.exports = React.createClass({
     if (this.state.currentPage === 'about') {
       content =
         <Info messages={this.props.aboutMessages}>
-          <Button url={'https://github.com/tegon/traktflix'} text={'Read more'} />
+          <Button url={'https://github.com/MrMamen/traktflix/tree/traktNRK'} text={'Read more'} />
         </Info>
     } else {
       if (this.state.logged) {

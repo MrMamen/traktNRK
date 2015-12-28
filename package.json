@@ -1,7 +1,7 @@
 {
-  "name": "traktflix",
+  "name": "traktNRK",
   "version": "1.0.0",
-  "description": "Trakt.tv and Netflix integration",
+  "description": "Trakt.tv and NRK integration",
   "repository": {
     "type": "git",
     "url": "git://github.com/tegon/traktflix.git"

@@ -31,8 +31,8 @@ ContentController.prototype = {
   },
 
   onSearchError: function(status, response) {
-    this.sendAnalyticsEvent({ name: 'onSearchError', value: status + ' - ' + this.item.title });
-    console.error('traktflix: Search error', status, response, this.item.title);
+    this.sendAnalyticsEvent({ name: 'onSearchError', value: (this.item && this.item.title) ? this.item.title : status });
+    console.error('traktNRK: Search error', status, response);
   },
 
   onScrobbleSuccess: function() {
@@ -41,7 +41,7 @@ ContentController.prototype = {
 
   onScrobbleError: function() {
     this.sendAnalyticsEvent({ name: 'Scrobble', value: 'onError' });
-    console.error('traktflix: Scrobble error');
+    console.error('traktNRK: Scrobble error');
   },
 
   storeItem: function(item) {

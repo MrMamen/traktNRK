@@ -1,7 +1,7 @@
 {
     "name": "__MSG_appName__",
     "short_name": "__MSG_appShortName__",
-    "version": "0.9",
+    "version": "1.1.0",
     "manifest_version": 2,
     "description": "__MSG_appDescription__",
     "icons": {
@@ -44,8 +44,7 @@
         "storage",
         "unlimitedStorage",
         "http://trakt.tv/*",
-        "https://www.google-analytics.com/",
-        "*://tv.nrk.no/*"
+        "https://www.google-analytics.com/"
     ],
     "web_accessible_resources": [
         "images/svg/*.svg"

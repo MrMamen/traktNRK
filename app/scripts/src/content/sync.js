@@ -87,7 +87,7 @@ Sync.prototype = {
   },
 
   onError: function(status, response) {
-    console.error('traktflix: Sync error', status, response);
+    console.error('traktNRK: Sync error', status, response);
   }
 };
 

@@ -4,7 +4,10 @@
 var fullTitles = {
   'Broen': 'The Bridge',
   'Kampen om tungtvannet': 'the heavy water wars',
-  'Tyskland 83': 'Deutschland 83'
+  'Tyskland 83': 'Deutschland 83',
+  'Laserblikk p\u00E5 historien': 'Time Scanners',
+  "Krig og fred": 'War and Peace Alexander I',
+  "Brodies mysterier": 'Case Histories'
 }
 
 function Item(options) {

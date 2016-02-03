@@ -20,7 +20,6 @@ ContentController.prototype = {
     this.scrobble = new Scrobble({
       response: response,
       type: this.item.type,
-      scrubber: this.item.getProgress.bind(this.item),
       success: this.onScrobbleSuccess.bind(this),
       error: this.onScrobbleError.bind(this)
     });
@@ -31,8 +30,8 @@ ContentController.prototype = {
   },
 
   onSearchError: function(status, response) {
-    this.sendAnalyticsEvent({ name: 'onSearchError', value: (this.item && this.item.title) ? this.item.title : status });
-    console.error('traktNRK: Search error', status, response);
+    this.sendAnalyticsEvent({ name: 'onSearchError', value: status + ' - ' + this.item.title });
+    console.error('traktNRK: Search error', status, response, this.item.title);
   },
 
   onScrobbleSuccess: function() {

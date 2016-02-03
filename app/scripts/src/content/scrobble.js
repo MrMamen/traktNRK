@@ -10,16 +10,52 @@ function Scrobble(options) {
     this.item = { movie: options.response.movie };
   }
 
-  this.scrubber = options.scrubber;
+  this.onProgressChange();
   this.url = Settings.apiUri + '/scrobble';
   this.success = options.success;
   this.error = options.error;
+  this.startProgressTimeout();
 };
 
 Scrobble.prototype = {
+  startProgressTimeout: function() {
+    this.progressChangeInterval = setInterval(function() {
+      this.onProgressChange();
+    }.bind(this), 1000);
+  },
+
+  stopProgressTimeout: function() {
+    clearInterval(this.progressChangeInterval);
+  },
+
+  onProgressChange: function() {
+    if (document.querySelector('.player-slider progress')) {
+      this.castScrubber();
+    } else {
+      this.webScrubber();
+    }
+  },
+
+  webScrubber: function() {
+    var scrubber = document.querySelector('#scrubber-component .player-scrubber-progress-completed');
+    if (scrubber) {
+      this.progress = parseFloat(scrubber.style.width);
+    }
+  },
+
+  castScrubber: function() {
+    var progressElement = document.querySelector('.player-slider progress');
+    if (progressElement) {
+      var newProgress = parseInt(progressElement.getAttribute('value')) * 100 / parseFloat(progressElement.getAttribute('max'));
+      if (newProgress > 0) {
+        this.progress = newProgress;
+      }
+    }
+  },
+
   _sendScrobble: function(options) {
     var params = this.item;
-    params.progress = this.scrubber.call();
+    params.progress = this.progress;
 
     Request.send({
       method: 'POST',
@@ -40,6 +76,7 @@ Scrobble.prototype = {
 
   stop: function() {
     this._sendScrobble({ path: '/stop' });
+    this.stopProgressTimeout();
   }
 };
 

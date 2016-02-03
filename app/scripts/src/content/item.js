@@ -11,9 +11,6 @@ var fullTitles = {
 }
 
 function Item(options) {
-  this.scrubber = options.scrubber;
-  this.progress = options.progress;
-  this.duration = options.duration;
   this.title = fullTitles[options.title] || options.title;
   this.type = options.type;
 
@@ -23,12 +20,5 @@ function Item(options) {
     this.episode = options.episode;
   }
 }
-
-Item.prototype.getProgress = function() {
-  if (this.scrobber !== undefined){
-    return parseFloat(parseFloat(this.scrubber.style.width).toFixed(2));
-  }
-  return parseFloat(parseFloat(this.progress()/this.duration()*100).toFixed(2));
-};
 
 module.exports = Item;

@@ -27,16 +27,14 @@ ItemParser.parse = function parse(callback) {
     var title = document.querySelector("meta[name=seriestitle]").getAttribute("content");
 
     item = new Item({
-      epTitle: mainTitle,
-      progress: progress,
-      duration: duration,
-      title: title,
+      epTitle: title,
+      title: mainTitle,
       season: season,
       episode: number,
       type: type
     });
   } else {
-    item = new Item({ progress: progress, duration: duration, title: mainTitle, type: type });
+    item = new Item({ title: mainTitle, type: type });
   }
 
   callback.call(this, item);

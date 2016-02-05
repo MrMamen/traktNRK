@@ -23,10 +23,6 @@ ContentController.prototype = {
       success: this.onScrobbleSuccess.bind(this),
       error: this.onScrobbleError.bind(this)
     });
-
-    this.setActiveIcon();
-    this.scrobble.start();
-    this.sendAnalyticsEvent({ name: 'Scrobble', value: 'start' });
   },
 
   onSearchError: function(status, response) {

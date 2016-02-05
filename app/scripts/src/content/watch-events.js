@@ -11,6 +11,7 @@ function WatchEvents(options) {
   this.onPause = options.onPause;
   this.onStop = options.onStop;
   this.url = location.href;
+  this.wasPlaying = false;
 }
 
 WatchEvents.prototype = {
@@ -19,6 +20,7 @@ WatchEvents.prototype = {
     this.addStopListener();
     this.addKeyUpListener();
     this.addUrlChangeListener();
+    this.addIsPlayingListener();
   },
 
   stopListeners: function() {
@@ -26,6 +28,7 @@ WatchEvents.prototype = {
     this.removeStopListener();
     this.removeKeyUpListener();
     this.removeUrlChangeListener();
+    this.removeIsPlayingListener();
   },
 
   addClickListener: function() {
@@ -53,6 +56,20 @@ WatchEvents.prototype = {
     }.bind(this), 1000);
   },
 
+  addIsPlayingListener: function() {
+    this.checkIsPlayingInterval = setInterval(function() {
+      var isPlaying = this.isPlaying();
+      if (this.wasPlaying != isPlaying){
+        if (isPlaying){
+          this.onPlay();
+        }else{
+          this.onPause();
+        }
+        this.wasPlaying = isPlaying;
+      }
+    }.bind(this), 1000);
+  },
+
   onClick: function(e) {
     if (e.target.classList.contains('play')) {
       //Unfortinately the click event is not detected when pressing the player (due to flash)
@@ -62,7 +79,7 @@ WatchEvents.prototype = {
       var self = this;
       setTimeout(function() {
         self.onPlay(e);
-      }, 1500);
+      }, 2000);
     }
   },
 
@@ -108,10 +125,17 @@ WatchEvents.prototype = {
     clearInterval(this.urlChangeInterval);
   },
 
+  removeIsPlayingListener: function() {
+    clearInterval(this.checkIsPlayingInterval);
+  },
+
   isPlaying: function() {
     var player = document.getElementById("flashPlayer");
+    if (player === null || player["JSgetCurrentPosition"] == undefined) {
+      return false;
+    }
     var dur = player["JSgetCurrentPosition"]();
-    for (var i = 0; i < 100 && dur == player["JSgetCurrentPosition"](); i++){
+    for (var i = 0; i < 150 && dur == player["JSgetCurrentPosition"](); i++) {
       //Just to pass some time to see if there is any progress
     }
     return dur !== player["JSgetCurrentPosition"]()

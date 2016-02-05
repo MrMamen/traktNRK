@@ -29,26 +29,19 @@ Scrobble.prototype = {
   },
 
   onProgressChange: function() {
-    if (document.querySelector('.player-slider progress')) {
-      this.castScrubber();
-    } else {
-      this.webScrubber();
-    }
+      this.flashScrubber();
   },
 
-  webScrubber: function() {
-    var scrubber = document.querySelector('#scrubber-component .player-scrubber-progress-completed');
-    if (scrubber) {
-      this.progress = parseFloat(scrubber.style.width);
-    }
-  },
-
-  castScrubber: function() {
-    var progressElement = document.querySelector('.player-slider progress');
-    if (progressElement) {
-      var newProgress = parseInt(progressElement.getAttribute('value')) * 100 / parseFloat(progressElement.getAttribute('max'));
-      if (newProgress > 0) {
-        this.progress = newProgress;
+  flashScrubber: function() {
+    var player = document.getElementById("flashPlayer");
+    if (player) {
+      var progress = player["JSgetCurrentPosition"];
+      var duration = player["JSgetDuration"];
+      if (progress && duration){
+        var newProgress = parseFloat(parseFloat(progress()/duration()*100).toFixed(2));
+        if (newProgress > 0) {
+          this.progress = newProgress;
+        }
       }
     }
   },

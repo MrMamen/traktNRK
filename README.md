@@ -3,11 +3,6 @@ This project was forked from a [similar plugin for Netflix and trakt.tv](https:/
 
 [![download](ChromeWebStore_BadgeWBorder_v2_206x58.png)](https://chrome.google.com/webstore/detail/traktnrk-nrk-and-trakttv/pmdefhmfakfklmghckphgnfifbcmeahk)
 
-[![Build Status](https://travis-ci.org/tegon/traktflix.svg?branch=master)](https://travis-ci.org/tegon/traktflix)
-[![Coverage Status](https://coveralls.io/repos/tegon/traktflix/badge.svg?branch=master&service=github)](https://coveralls.io/github/tegon/traktflix?branch=master)
-
-[![download](ChromeWebStore_BadgeWBorder_v2_206x58.png)](https://chrome.google.com/webstore/detail/bmoemkaigjgcgjjnpmdgkifndiidkeji)
-
 ###Table of Contents
 * [What is Trakt?](#what-is-trakt)
 * [Why do I need this extension?](#why-do-i-need-this-extension)

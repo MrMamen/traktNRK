@@ -1,8 +1,7 @@
 {
     "name": "__MSG_appName__",
     "short_name": "__MSG_appShortName__",
-    "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAxLbPbWf2aOKtuqVv7CZ0ilreH7eHQZeuF0Ra+jbrxgJGB5pJugg54pVN1u7OQFpixPR3+V5vkGjm/lnNrhXODp2gIL92nraqz5uXl+heWYQC8vS6hfwTU7uJCBmgS4qvoDW7+CIOLYNTKePKWDn3zftBNlpE2q38ENnIRBif0UUlQBnWCbc+Pbpwd1wE2++9bXywaP8367eT0hibZ3w1CauhupqSyIid/G/5+idlMqvZFJofqz7taxqy1sI/Ym+fdUH39+L3UA2E8BT7bIn6OrkP5bXa+qew87l7BjTgYW45JeopxfpdThLmis8bCDf5UypnFVyy7GDRwk5EsW9OaQIDAQAB",
-    "version": "1.2.1",
+    "version": "1.3.0",
     "manifest_version": 2,
     "description": "__MSG_appDescription__",
     "icons": {

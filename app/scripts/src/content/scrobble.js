@@ -29,20 +29,13 @@ Scrobble.prototype = {
   },
 
   onProgressChange: function() {
-      this.flashScrubber();
+    this.html5Scrubber();
   },
 
-  flashScrubber: function() {
-    var player = document.getElementById("flashPlayer");
-    if (player) {
-      var progress = player["JSgetCurrentPosition"];
-      var duration = player["JSgetDuration"];
-      if (progress && duration){
-        var newProgress = parseFloat(parseFloat(progress()/duration()*100).toFixed(2));
-        if (newProgress > 0) {
-          this.progress = newProgress;
-        }
-      }
+  html5Scrubber: function() {
+    var scrubber = document.getElementsByClassName("ludo-scrubber__played")[0];
+    if (scrubber){
+      this.progress = parseFloat(scrubber.style.width);
     }
   },
 

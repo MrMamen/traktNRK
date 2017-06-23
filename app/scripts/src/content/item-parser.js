@@ -23,8 +23,8 @@ ItemParser.parse = function parse(callback) {
       return;
     }
     var season = uri.split("/")[4].slice(7);
-    var number = document.querySelector("meta[name=episodenumber]").getAttribute("content");
-    var title = document.querySelector("meta[name=seriestitle]").getAttribute("content");
+    var number = uri.split("/")[5].slice(8);
+    var title = uri.split("/")[2];
 
     item = new Item({
       epTitle: mainTitle,

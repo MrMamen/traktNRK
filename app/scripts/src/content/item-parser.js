@@ -19,12 +19,12 @@ ItemParser.parse = function parse(callback) {
 
   if (type === 'show') {
     var uri = document.querySelector("li.episode-item.active a").getAttribute("href");
-    if (uri.split("/")[4].substring(0, 6) !== "sesong") {
+    if (!uri.split('/')[4] || uri.split('/')[4].substring(0, 6) !== 'sesong') {
       return;
     }
     var season = uri.split("/")[4].slice(7);
     var number = uri.split("/")[5].slice(8);
-    var title = uri.split("/")[2];
+    var title = document.querySelector('a[itemprop="name"]').innerHTML;
 
     item = new Item({
       epTitle: mainTitle,

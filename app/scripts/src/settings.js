@@ -5,5 +5,8 @@ module.exports = {
   clientId: '@@clientId',
   clientSecret: '@@clientSecret',
   apiVersion: 2,
-  analyticsId: '@@analyticsId'
+  analyticsId: '@@analyticsId',
+  rollbarToken: '@@rollbarToken',
+  tmdbApiKey: '@@tmdbApiKey',
+  environment: '@@environment'
 };

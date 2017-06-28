@@ -2,11 +2,15 @@
   "production": {
     "clientId": "{TraktClientId}",
     "clientSecret": "{TraktClientSecret}",
-    "analyticsId": "{GoogleAnalyticsId}"
+    "analyticsId": "{GoogleAnalyticsId}",
+    "rollbarToken": "{RollbarToken}",
+    "tmdbApiKey": "{TheMovieDatabaseApiKey}"
   },
   "development": {
     "clientId": "{TraktClientId}",
     "clientSecret": "{TraktClientSecret}",
-    "analyticsId": "{GoogleAnalyticsId}"
+    "analyticsId": "{GoogleAnalyticsId}",
+    "rollbarToken": "{RollbarToken}",
+    "tmdbApiKey": "{TheMovieDatabaseApiKey}"
   }
 }

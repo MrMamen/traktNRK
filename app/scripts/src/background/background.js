@@ -4,6 +4,7 @@ var Analytics = require('./analytics.js');
 var Oauth = require('../oauth.js');
 var Settings = require('../settings.js');
 var service = analytics.getService('traktNRK');
+var rollbar = require('../rollbar.js');
 var tracker = service.getTracker(Settings.analyticsId);
 Analytics.setTracker(tracker);
 
@@ -55,6 +56,14 @@ chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
     case 'clearStorage':
       chrome.storage.local.clear(sendResponse);
       return true;
+      break;
+    case 'showErrorNotification':
+      chrome.notifications.create({
+        type: 'basic',
+        iconUrl: 'images/traktflix-icon-128.png',
+        title: 'An error has occurred :(',
+        message: request.message
+      });
       break;
   }
 });

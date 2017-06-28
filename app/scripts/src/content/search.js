@@ -11,16 +11,15 @@ function Search(options) {
 
 Search.prototype = {
   getUrl: function() {
-    return this.url + '?type=' + this.item.type + '&query=' + encodeURIComponent(this.item.title);
+    return this.url + '/' + this.item.type + '?query=' + encodeURIComponent(this.item.title);
   },
 
   getEpisodeUrl: function(slug) {
     if (this.item.episode) {
       return this.showsUrl + '/' + slug + '/seasons/' + this.item.season
-          + '/episodes/' + this.item.episode + '?extended=images';
+        + '/episodes/' + this.item.episode;
     } else {
-      return this.showsUrl + '/' + slug + '/seasons/' + this.item.season
-          + '?extended=images';
+      return this.showsUrl + '/' + slug + '/seasons/' + this.item.season;
     }
   },
 
@@ -30,60 +29,56 @@ Search.prototype = {
       url: this.getUrl(),
       success: function(response) {
         var data = JSON.parse(response)[0];
-        if (data == undefined) {
+        if (data === undefined) {
           options.error.call(this, 404);
         } else {
           options.success.call(this, data);
         }
       },
-      error: function(status, response) {
-        options.error.call(this, status, response);
+      error: function(status, response, opts) {
+        options.error.call(this, status, response, opts);
       }
     });
   },
 
-  findEpisodeByTitle: function(response, options) {
+  findEpisodeByTitle: function(show, response, options) {
     var episodes = JSON.parse(response);
     var episode;
 
     for (var i = 0; i < episodes.length; i++) {
-      if (episodes[i].title.toLowerCase() === this.item.epTitle.toLowerCase()) {
+      if (this.item.epTitle && episodes[i].title && episodes[i].title.toLowerCase() === this.item.epTitle.toLowerCase()) {
         episode = episodes[i];
         break;
       }
     }
 
     if (episode) {
-      options.success.call(this, episode);
+      options.success.call(this, Object.assign(episode, show));
     } else {
-      options.error.call(this, 404, 'Episode not found.');
+      options.error.call(this, 404, 'Episode not found.', {show: show, item: this.item});
     }
   },
 
   findEpisode: function(options) {
     this.findItem({
       success: function(response) {
-        if (!response) {
-          options.error.call(this, "200", response);
-        } else {
-          Request.send({
-            method: 'GET',
-            url: this.getEpisodeUrl(response['show']['ids']['slug']),
-            success: function(resp) {
-              if (this.item.episode) {
-                options.success.call(this, JSON.parse(resp));
-              } else {
-                this.findEpisodeByTitle(resp, options);
-              }
-            }.bind(this),
-            error: function(st, resp) {
-              options.error.call(this, st, resp);
+        Request.send({
+          method: 'GET',
+          url: this.getEpisodeUrl(response['show']['ids']['slug']),
+          success: function(resp) {
+            if (this.item.episode) {
+              options.success.call(this, Object.assign(JSON.parse(resp), response));
+            } else {
+              this.findEpisodeByTitle(response, resp, options);
             }
-          });
-        }
+          }.bind(this),
+          error: function(st, resp, opts) {
+            options.error.call(this, st, resp, opts);
+          }
+        });
       }.bind(this),
-      error: function(status, response) {
-        options.error.call(this, status, response);
+      error: function(status, response, opts) {
+        options.error.call(this, status, response, opts);
       }
     });
   },

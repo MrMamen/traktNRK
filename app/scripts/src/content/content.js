@@ -2,9 +2,8 @@
 
 var WatchEvents = require('./watch-events.js');
 var ContentController = require('./content-controller.js');
-var Sync = require('./sync.js');
 var controller = new ContentController();
-var sync = new Sync();
+var rollbar = require('../rollbar.js');
 
 var events = new WatchEvents({
   onPlay: controller.onPlay.bind(controller),
@@ -13,23 +12,9 @@ var events = new WatchEvents({
 });
 
 events.startListeners();
-sync.needToSync(function(needToSync) {
-  if (needToSync) {
-    sync.start(function(success) {
-      console.log('sync completed', success);
-    });
-  }
-});
 
 chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
   if (request.type == 'getCurrentItem') {
     sendResponse(controller.getCurrentItem());
-  }
-});
-
-chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
-  if (request.type == 'startSync') {
-    sync.start(sendResponse);
-    return true;
   }
 });

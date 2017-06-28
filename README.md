@@ -71,4 +71,17 @@ To run tests
 npm test
 ```
 
+### Credits
+<h3 align="center">
+  <a href="https://tegon.github.io/traktflix/">
+    <img src="https://raw.githubusercontent.com/mrmamen/traktNRK/master/tmdb-api-logo.png" alt="TMDB" width="150">
+  </a>
+  <a href="https://tegon.github.io/traktflix/">
+      <img src="https://raw.githubusercontent.com/mrmamen/traktNRK/master/trakt-api-logo.png" alt="TMDB" width="150">
+  </a>
+</h3>
+
+This product uses the TMDb API but is not endorsed or certified by TMDb. <br>
+This product uses the Trakt.tv API.
+
 [LICENSE](LICENSE)

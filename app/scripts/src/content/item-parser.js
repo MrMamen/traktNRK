@@ -4,6 +4,10 @@ var Item = require('./item.js');
 
 function ItemParser() {}
 
+ItemParser.isEpisodeOrMovie = function () {
+  return document.querySelector("meta[name=type]") !== null;
+};
+
 ItemParser.isReady = function checkPage() {
   var type = document.querySelector("meta[name=type]").getAttribute("content");
   if (type == "episode") {
@@ -40,6 +44,11 @@ ItemParser.parse = function parse(callback) {
 };
 
 ItemParser.start = function start(callback) {
+  if (!ItemParser.isEpisodeOrMovie()){
+    console.error("No meta-type found");
+    callback.call(this, null);
+    return;
+  }
   var readyTimeout;
 
   if (ItemParser.isReady()) {

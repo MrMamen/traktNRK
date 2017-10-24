@@ -39,7 +39,7 @@ export default class ActivityListItem extends React.Component {
     let traktDate, traktUrl, traktTitle;
 
     if (trakt) {
-      traktDate = trakt.date ? trakt.date.format('MMMM Do YYYY, h:mm:ss a') : '-';
+      traktDate = trakt.date ? trakt.date.format('MMMM Do YYYY, HH:mm:ss') : '-';
       traktUrl = trakt.season ? `https://trakt.tv/shows/${trakt.show.ids.slug}/seasons/${trakt.season}/episodes/${trakt.number}` : `https://trakt.tv/movies/${trakt.ids.slug}`;
       if (trakt.show && trakt.title){
         traktTitle = `${trakt.show.title}: ${trakt.title}`;
@@ -63,7 +63,7 @@ export default class ActivityListItem extends React.Component {
           <span> / </span>
           <span><a href={traktUrl} target='_blank'>Trakt.tv title: {traktTitle}</a></span>
           <span className='mdl-list__item-text-body'>
-            NRK date: {nrk.date.format('MMMM Do YYYY, h:mm:ss a')} / Trakt.tv date: {traktDate}
+            NRK date: {nrk.date.format('MMMM Do YYYY, HH:mm:ss')} / Trakt.tv date: {traktDate}
             <br />
             NRK progress: {nrk.progress.percentageWatched}%
             <br />

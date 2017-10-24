@@ -49,7 +49,7 @@ export default class NRKWebAPIUtils {
 
   static parseActivity(activity) {
     const program = activity.program;
-    const date = moment(activity.lastSeen.at);
+    const date = moment(activity.lastSeen.at).add(2, "h"); //NRK timestamp is in GMT
     let item;
     const type = program.programType === 'Episode' ? 'show' : 'movie';
 
@@ -77,8 +77,8 @@ export default class NRKWebAPIUtils {
     }
 
     return new Promise((resolve, reject) => {
-      let NRK = Object.assign(item, { id: program.id, progress: activity.lastSeen });
-      TraktWebAPIUtils.getActivity({ item, date }).then(resolve).catch(resolve);
+      Object.assign(item, { id: program.id, progress: activity.lastSeen });
+      TraktWebAPIUtils.getActivity({ item, date }).then(resolve).catch(reject);
     });
   }
 }

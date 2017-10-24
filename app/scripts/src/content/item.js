@@ -7,7 +7,10 @@ var fullTitles = {
   'Tyskland 83': 'Deutschland 83',
   'Laserblikk p\u00E5 historien': 'Time Scanners',
   "Krig og fred": 'War and Peace Alexander I',
-  "Brodies mysterier": 'Case Histories'
+  "Brodies mysterier": 'Case Histories',
+  "Monster": 'Monster Norway',
+  "Ukens vinner": 'Winner of the Week',
+  "Side om side": "Side by Side"
 }
 
 function Item(options) {

@@ -78,7 +78,7 @@ export default class NRKWebAPIUtils {
 
     return new Promise((resolve, reject) => {
       Object.assign(item, { id: program.id, progress: activity.lastSeen });
-      TraktWebAPIUtils.getActivity({ item, date }).then(resolve).catch(reject);
+      TraktWebAPIUtils.getActivity({ item, date }).then(resolve).catch(resolve);
     });
   }
 }

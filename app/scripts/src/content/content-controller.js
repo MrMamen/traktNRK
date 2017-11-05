@@ -61,9 +61,11 @@ ContentController.prototype = {
     if (this.item === null && this.scrobble === undefined) {
       ItemParser.start(this.storeItem.bind(this));
     } else {
-      this.setActiveIcon();
-      this.scrobble.start();
-      this.sendAnalyticsEvent({ name: 'Scrobble', value: 'start' });
+      if (this.scrobble){
+        this.setActiveIcon();
+        this.scrobble.start();
+        this.sendAnalyticsEvent({ name: 'Scrobble', value: 'start' });
+      }
     }
   },
 

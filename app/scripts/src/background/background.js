@@ -13,7 +13,7 @@ chrome.runtime.onInstalled.addListener(function() {
     chrome.declarativeContent.onPageChanged.addRules([{
       conditions: [
         new chrome.declarativeContent.PageStateMatcher({
-          pageUrl: { hostSuffix: 'nrk.no' }
+          pageUrl: { hostEquals: 'tv.nrk.no' }
         })
       ],
       actions: [new chrome.declarativeContent.ShowPageAction()]

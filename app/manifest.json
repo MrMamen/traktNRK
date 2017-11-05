@@ -1,7 +1,7 @@
 {
     "name": "__MSG_appName__",
     "short_name": "__MSG_appShortName__",
-    "version": "2.0.4",
+    "version": "2.0.5",
     "manifest_version": 2,
     "description": "__MSG_appDescription__",
     "icons": {
@@ -18,7 +18,7 @@
     "content_scripts": [
         {
             "matches": [
-                "https://*.nrk.no/*"
+                "https://tv.nrk.no/*"
             ],
             "js": [
                 "scripts/build/content.js"
@@ -45,7 +45,7 @@
         "unlimitedStorage",
         "http://trakt.tv/*",
         "https://www.google-analytics.com/",
-        "*://*.nrk.no/*",
+        "*://tv.nrk.no/*",
         "notifications"
     ],
     "web_accessible_resources": [

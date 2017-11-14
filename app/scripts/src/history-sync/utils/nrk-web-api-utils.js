@@ -70,7 +70,8 @@ export default class NRKWebAPIUtils {
         episode: episode,
         title: title,
         season: season,
-        type: type
+        type: type,
+        nrkId: program.myContentId
       });
     } else {
       item = new Item({ title: program.title, type: type });

@@ -11,6 +11,9 @@ function Search(options) {
 
 Search.prototype = {
   getUrl: function() {
+    if (this.item.tvdbId){
+      return this.url + '/tvdb/' + this.item.tvdbId+"?type=show";
+    }
     return this.url + '/' + this.item.type + '?query=' + encodeURIComponent(this.item.title);
   },
 

@@ -26,6 +26,7 @@ ItemParser.parse = function parse(callback) {
     if (!uri.split('/')[4] || uri.split('/')[4].substring(0, 6) !== 'sesong') {
       return;
     }
+    var nrkSeriesId = uri.split("/")[2];
     var season = uri.split("/")[4].slice(7);
     var number = uri.split("/")[5].slice(8);
     var title = document.querySelector('a[itemprop="name"]').innerHTML;
@@ -35,7 +36,8 @@ ItemParser.parse = function parse(callback) {
       title: title,
       season: season,
       episode: number,
-      type: type
+      type: type,
+      nrkId: nrkSeriesId
     });
   } else {
     item = new Item({ title: mainTitle, type: type });

@@ -13,7 +13,10 @@ const tvdbIDs = {
   "verdens-toeffeste-togturer": 264771,
   "paa-benken": 333947,
   "over-hekken": 299939,
-  "hva-feiler-det-dege": 320101
+  "hva-feiler-det-dege": 320101,
+  "kalde-foetter": 77152,
+  "le-bureau": 294564,
+  "stacey-dooley-forbudt-sex": 308622
 };
 
 function Item(options) {

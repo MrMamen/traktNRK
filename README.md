@@ -82,6 +82,7 @@ npm test
 </h3>
 
 This product uses the TMDb API but is not endorsed or certified by TMDb. <br>
-This product uses the Trakt.tv API.
+This product uses the Trakt.tv API. <br>
+This product is forked from [traktflix](https://github.com/tegon/traktflix) by tegon and other contributors.
 
 [LICENSE](LICENSE)

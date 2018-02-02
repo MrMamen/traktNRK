@@ -16,7 +16,10 @@ const tvdbIDs = {
   "hva-feiler-det-dege": 320101,
   "kalde-foetter": 77152,
   "le-bureau": 294564,
-  "stacey-dooley-forbudt-sex": 308622
+  "stacey-dooley-forbudt-sex": 308622,
+  "hotellenes-hemmeligheter": 264122,
+  "gutter-er-gutter": 269593,
+  "ei-tidsreise-gjennom-science-fiction-si-historie": 279432
 };
 
 function Item(options) {

@@ -1,39 +1,55 @@
 'use strict';
+var Rollbar = require('../rollbar.js');
 
 var Item = require('./item.js');
 
 function ItemParser() {}
 
 ItemParser.isEpisodeOrMovie = function () {
-  return document.querySelector("meta[name=type]") !== null;
+  return document.querySelector("meta[property='og:type']") !== null;
 };
 
 ItemParser.isReady = function checkPage() {
-  var type = document.querySelector("meta[name=type]").getAttribute("content");
-  if (type == "episode") {
-    return document.querySelector("li.episode-item.active a") !== null;
+  var type = document.querySelector("meta[name=type]");
+  if (!type) {
+    return document.querySelector("a.tv-series-episodes__episode-link--active") !== null;
   }
   return true;
 };
 
 ItemParser.parse = function parse(callback) {
   var item;
-  var type = document.querySelector("meta[name=type]").getAttribute("content") == 'episode' ? 'show' : 'movie';
-  var mainTitle = document.querySelector("meta[name=title]").getAttribute("content");
-
+  var type;
+  var typeElement = document.querySelector("meta[name=type]");
+  if (typeElement) {
+    if (typeElement.getAttribute("content") == 'program') {
+      type = "movie";
+    } else {
+      Rollbar.error("Unknown series/movie type", typeElement.getAttribute("content"))
+    }
+  } else {
+    type = "show"
+  }
+  var mainTitle = document.querySelector("title").text;
+  if (mainTitle.slice(0, 7) !== "NRK TV ") {
+    Rollbar.error("Title attribute changed", mainTitle)
+  } else {
+    mainTitle = mainTitle.slice(9);
+  }
   if (type === 'show') {
-    var uri = document.querySelector("li.episode-item.active a").getAttribute("href");
-    if (!uri.split('/')[4] || uri.split('/')[4].substring(0, 6) !== 'sesong') {
+    var uri = document.querySelector("a.tv-series-episodes__episode-link--active").getAttribute("href");
+    //format as of july 2018 "/serie/narvestad-tar-ferie/sesong/1/episode/6"
+    if (!uri.split('/')[3] || uri.split('/')[3] !== 'sesong') {
+      Rollbar.error("Unexpected URL-format", uri);
       return;
     }
     var nrkSeriesId = uri.split("/")[2];
-    var season = uri.split("/")[4].slice(7);
-    var number = uri.split("/")[5].slice(8);
-    var title = document.querySelector('a[itemprop="name"]').innerHTML;
+    var season = uri.split("/")[4];
+    var number = uri.split("/")[6];
+    // var epTitle = document.querySelector('a[itemprop="name"]').innerHTML;
 
     item = new Item({
-      epTitle: mainTitle,
-      title: title,
+      title: mainTitle,
       season: season,
       episode: number,
       type: type,

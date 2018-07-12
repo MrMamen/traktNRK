@@ -1,5 +1,4 @@
 import React from 'react';
-import Rollbar from '../../rollbar';
 
 export default class TraktURLForm extends React.Component {
   constructor() {

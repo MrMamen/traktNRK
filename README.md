@@ -44,11 +44,7 @@ Copy the `config.json` example file and change Trakt.tv credentials:
 cp config.json.dev config.json
 ```
 
-Use [nvm](https://github.com/creationix/nvm) to run in the correct version of node
-
-```bash
-nvm use
-```
+The following examples uses npm, but yarn may also be used.
 
 Install the dependencies
 ```bash
@@ -66,7 +62,7 @@ npm run build
 npm run zip
 ```
 
-To run tests
+To run tests (currently not working)
 ```bash
 npm test
 ```

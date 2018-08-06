@@ -20,21 +20,18 @@ ItemParser.isReady = function checkPage() {
 ItemParser.parse = function parse(callback) {
   var item;
   var type;
+  var mainTitle
   var typeElement = document.querySelector("meta[name=type]");
   if (typeElement) {
     if (typeElement.getAttribute("content") == 'program') {
       type = "movie";
+      mainTitle = document.querySelector("meta[name=title]").getAttribute("content");
     } else {
       Rollbar.error("Unknown series/movie type", typeElement.getAttribute("content"))
     }
   } else {
-    type = "show"
-  }
-  var mainTitle = document.querySelector("title").text;
-  if (mainTitle.slice(0, 7) !== "NRK TV ") {
-    Rollbar.error("Title attribute changed", mainTitle)
-  } else {
-    mainTitle = mainTitle.slice(9);
+    type = "show";
+    mainTitle = document.querySelector(".tv-series-hero__title").text;
   }
   if (type === 'show') {
     var uri = document.querySelector("a.tv-series-episodes__episode-link--active").getAttribute("href");

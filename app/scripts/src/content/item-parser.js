@@ -20,7 +20,7 @@ ItemParser.isReady = function checkPage() {
 ItemParser.parse = function parse(callback) {
   var item;
   var type;
-  var mainTitle
+  var mainTitle;
   var typeElement = document.querySelector("meta[name=type]");
   if (typeElement) {
     if (typeElement.getAttribute("content") == 'program') {
@@ -31,7 +31,7 @@ ItemParser.parse = function parse(callback) {
     }
   } else {
     type = "show";
-    mainTitle = document.querySelector(".tv-series-hero__title").text;
+    mainTitle = document.querySelector(".tv-series-hero__title").textContent;
   }
   if (type === 'show') {
     var uri = document.querySelector("a.tv-series-episodes__episode-link--active").getAttribute("href");

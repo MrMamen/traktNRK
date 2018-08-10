@@ -25,9 +25,11 @@ export default class TraktWebAPIUtils {
       success: function(response) {
         let json = JSON.parse(response);
         ActivityActionCreators.syncSuccess(json.added.episodes, json.added.movies);
+        chrome.runtime.sendMessage({ type: 'sendEvent', name: 'HistorySync', value:  true });
       },
       error: function(status, response) {
         ActivityActionCreators.syncFailed(status, response);
+        chrome.runtime.sendMessage({ type: 'sendEvent', name: 'HistorySync', value:  false });
       }
     });
   }

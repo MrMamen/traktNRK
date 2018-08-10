@@ -23,6 +23,7 @@ export default class ViewingActivityApp extends React.Component {
 
   componentDidMount() {
     ActivityStore.addChangeListener(this._onChange.bind(this));
+    chrome.runtime.sendMessage({ type: 'sendAppView', view: 'History' });
   }
 
   componentWillUnmount() {

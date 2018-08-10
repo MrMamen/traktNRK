@@ -23,11 +23,16 @@ ItemParser.parse = function parse(callback) {
   var mainTitle;
   var typeElement = document.querySelector("meta[name=type]");
   if (typeElement) {
-    if (typeElement.getAttribute("content") == 'program') {
-      type = "movie";
-      mainTitle = document.querySelector("meta[name=title]").getAttribute("content");
-    } else {
-      Rollbar.error("Unknown series/movie type", typeElement.getAttribute("content"))
+    switch(typeElement.getAttribute("content")) {
+      case 'program':
+        type = "movie";
+        mainTitle = document.querySelector("meta[name=title]").getAttribute("content");
+        break;
+      case 'episode':
+        return;
+      default:
+        Rollbar.error("Unknown series/movie type", typeElement.getAttribute("content"));
+        return;
     }
   } else {
     type = "show";

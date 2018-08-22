@@ -63,7 +63,7 @@ export default class TraktWebAPIUtils {
         })
         .catch((status, response) => {
           let nrk = Object.assign(options.item, { date: options.date });
-          resolve(Object.assign({ nrk }, { add: false }));
+          resolve(Object.assign({ nrk, trakt: [] }, { add: false }));
         });
     });
   }
@@ -75,15 +75,19 @@ export default class TraktWebAPIUtils {
         url: TraktWebAPIUtils.activityUrl(options.result.activity),
         success: function(response) {
           let exclude = false;
-          let history = JSON.parse(response)[0];
-          let date;
+          let allHistory = JSON.parse(response);
+          let trakt = [];
 
-          if (history && history.watched_at) {
-            date = moment(history.watched_at);
-            exclude = date.diff(options.result.date, 'days') == 0;
-          }
-          let trakt = Object.assign(options.result.activity, { date: date });
-          let nrk = Object.assign(options.item, { date: options.date });
+          allHistory.forEach((history) => {
+            let date;
+            if (history && history.watched_at) {
+              date = moment(history.watched_at);
+              exclude = exclude || date.diff(options.result.date, 'days') == 0;
+            }
+            trakt.push(Object.assign({}, options.result.activity, {date: date.clone()}));
+          });
+
+          let nrk = Object.assign(options.item, {date: options.date});
           exclude = exclude || (options.item.progress.percentageWatched < options.item.progress.percentageAssumedFinished);
 
           resolve(Object.assign({ nrk, trakt }, { add: !exclude }));

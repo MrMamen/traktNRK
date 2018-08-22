@@ -24,23 +24,26 @@ ItemParser.parse = function parse(callback) {
   var typeElement = document.querySelector("meta[name=type]");
   if (typeElement) {
     switch(typeElement.getAttribute("content")) {
+      //Old format
       case 'program':
         type = "movie";
         mainTitle = document.querySelector("meta[name=title]").getAttribute("content");
+        item = new Item({ title: mainTitle, type: type });
         break;
       case 'episode':
+        type = "show";
+        mainTitle = document.querySelector("meta[name=title]").getAttribute("content");
+        Rollbar.info("Seems to not be a season based series", mainTitle);
         return;
       default:
         Rollbar.error("Unknown series/movie type", typeElement.getAttribute("content"));
         return;
     }
   } else {
+    //new format as of july 2018 "/serie/narvestad-tar-ferie/sesong/1/episode/6"
     type = "show";
     mainTitle = document.querySelector(".tv-series-hero__title").textContent;
-  }
-  if (type === 'show') {
     var uri = document.querySelector("a.tv-series-episodes__episode-link--active").getAttribute("href");
-    //format as of july 2018 "/serie/narvestad-tar-ferie/sesong/1/episode/6"
     if (!uri.split('/')[3] || uri.split('/')[3] !== 'sesong') {
       Rollbar.error("Unexpected URL-format", uri);
       return;
@@ -57,8 +60,6 @@ ItemParser.parse = function parse(callback) {
       type: type,
       nrkId: nrkSeriesId
     });
-  } else {
-    item = new Item({ title: mainTitle, type: type });
   }
   callback.call(this, item);
 };

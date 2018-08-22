@@ -35,17 +35,23 @@ export default class ActivityListItem extends React.Component {
       nrkTitle += " (S"+nrk.season+"E"+nrk.episode+")";
     }
     let nrkUrl = `https://tv.nrk.no/program/${nrk.id}`;
-    let trakt = activity.trakt;
+    let traktArray = activity.trakt;
     let traktDate, traktUrl, traktTitle;
 
-    if (trakt) {
-      traktDate = trakt.date ? trakt.date.format('MMMM Do YYYY, HH:mm:ss') : '-';
-      traktUrl = trakt.season ? `https://trakt.tv/shows/${trakt.show.ids.slug}/seasons/${trakt.season}/episodes/${trakt.number}` : `https://trakt.tv/movies/${trakt.ids.slug}`;
-      if (trakt.show && trakt.title){
-        traktTitle = `${trakt.show.title}: ${trakt.title}`;
-      } else {
-        traktTitle = trakt.show ? trakt.show.title : trakt.title;
-      }
+    if (traktArray) {
+      traktArray.forEach((trakt, index)=> {
+        if (index === 0){
+          traktDate = trakt.date ? trakt.date.format('MMMM Do YYYY, HH:mm:ss') : '-';
+          traktUrl = trakt.season ? `https://trakt.tv/shows/${trakt.show.ids.slug}/seasons/${trakt.season}/episodes/${trakt.number}` : `https://trakt.tv/movies/${trakt.ids.slug}`;
+          if (trakt.show && trakt.title){
+            traktTitle = `${trakt.show.title}: ${trakt.title}`;
+          } else {
+            traktTitle = trakt.show ? trakt.show.title : trakt.title;
+          }
+        } else {
+          traktDate += " & " + (trakt.date ? trakt.date.format('MMMM Do YYYY, HH:mm:ss') : '-');
+        }
+      })
     }
 
     let formId = `${nrk.id}--add`;
@@ -55,7 +61,7 @@ export default class ActivityListItem extends React.Component {
         <span className='mdl-list__item-primary-content'>
           <TmdbImage
             className='mdl-list__item-avatar'
-            item={trakt}
+            item={traktArray[0]}
             imageHost={this.props.imageHost}
             imageWidth={this.props.imageWidth}
           />

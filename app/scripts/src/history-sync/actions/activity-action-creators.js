@@ -1,6 +1,5 @@
 import ViewingActivityAppDispatcher from '../dispatcher/viewing-activity-app-dispatcher';
 import ActionTypes from '../constants/activity-constants';
-import NRKWebAPIUtils from '../utils/nrk-web-api-utils';
 
 export default class ActivityActionCreators {
   static receiveActivities(activities) {

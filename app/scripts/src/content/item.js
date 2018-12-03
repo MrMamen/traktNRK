@@ -19,7 +19,8 @@ const tvdbIDs = {
   "stacey-dooley-forbudt-sex": 308622,
   "hotellenes-hemmeligheter": 264122,
   "gutter-er-gutter": 269593,
-  "ei-tidsreise-gjennom-science-fiction-si-historie": 279432
+  "ei-tidsreise-gjennom-science-fiction-si-historie": 279432,
+  "lykkeland": 344464
 };
 
 function Item(options) {

@@ -48,7 +48,6 @@ function buildJS(src) {
         .pipe(source(src.file))
         .pipe(buffer())
         .pipe(replace(replacePatterns))
-        .pipe(gulpif(options.env === 'production', uglify()))
         .pipe(gulp.dest('./app/scripts/build/'))
         console.log(src.file + ' updated!', (Date.now() - updateStart) + 'ms');
     })
@@ -56,7 +55,6 @@ function buildJS(src) {
     .pipe(source(src.file))
     .pipe(buffer())
     .pipe(replace(replacePatterns))
-    .pipe(gulpif(options.env === 'production', uglify()))
     .pipe(gulp.dest('./app/scripts/build/'));
 }
 

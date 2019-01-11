@@ -47,9 +47,22 @@ export default class NRKWebAPIUtils {
    NRKWebAPIUtils.listActivities();
   }
 
+  static convertAspNetJSONDateToDateObject (value) {
+    const dateRegexp = /^\/?Date\((-?\d+)/i;
+    if (dateRegexp.exec(value) !== null) {
+      const dateInMs = parseInt(value.slice(6, 19), 10);
+      const i = value.lastIndexOf('+');
+      const offset = parseInt(value.substr(i+1, 4), 10); // Get offset
+      const offsetInMs = (offset / 100) * 60 * 60 * 1000;
+      const dateWithOffset = dateInMs + offsetInMs;
+      return new Date(dateWithOffset);
+    }
+    return new Date();
+  };
+
   static parseActivity(activity) {
     const program = activity.program;
-    const date = moment(activity.lastSeen.at).add(2, "h"); //NRK timestamp is in GMT
+    const date = moment(NRKWebAPIUtils.convertAspNetJSONDateToDateObject(activity.lastSeen.at));
     let item;
     const type = program.programType === 'Episode' ? 'show' : 'movie';
 

@@ -17,12 +17,12 @@ Search.prototype = {
     return this.url + '/' + this.item.type + '?query=' + encodeURIComponent(this.item.title);
   },
 
-  getEpisodeUrl: function(slug) {
+  getEpisodeUrl: function(traktId) {
     if (this.item.episode) {
-      return this.showsUrl + '/' + slug + '/seasons/' + this.item.season
+      return this.showsUrl + '/' + traktId + '/seasons/' + this.item.season
         + '/episodes/' + this.item.episode;
     } else {
-      return this.showsUrl + '/' + slug + '/seasons/' + this.item.season;
+      return this.showsUrl + '/' + traktId + '/seasons/' + this.item.season;
     }
   },
 
@@ -67,7 +67,7 @@ Search.prototype = {
       success: function(response) {
         Request.send({
           method: 'GET',
-          url: this.getEpisodeUrl(response['show']['ids']['slug']),
+          url: this.getEpisodeUrl(response['show']['ids']['trakt']),
           success: function(resp) {
             if (this.item.episode) {
               options.success.call(this, Object.assign(JSON.parse(resp), response));

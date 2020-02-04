@@ -12,7 +12,8 @@ const tvdbIDs = {
   "ei-tidsreise-gjennom-science-fiction-si-historie": 279432,
   "lykkeland": 344464,
   "romarriket": 343856,
-  "exit": 361816
+  "exit": 361816,
+  "the-bay": 360336
 };
 
 function Item(options) {

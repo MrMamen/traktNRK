@@ -10,7 +10,7 @@ ItemParser.isEpisodeOrMovie = function () {
 };
 
 ItemParser.isReady = function checkPage() {
-  return document.querySelector("a.tv-series-episode-list-item--active") !== null || document.querySelector("h1.tv-program-header__title") !== null;
+  return document.querySelector("a.tv-series-episode-list-item--selected") !== null || document.querySelector("h1.tv-program-header__title") !== null;
 };
 
 ItemParser.parse = function parse(callback) {
@@ -26,7 +26,7 @@ ItemParser.parse = function parse(callback) {
   } else if (seriesTitleElement) {
     type = "show";
     mainTitle = seriesTitleElement.textContent;
-    const uri = document.querySelector("a.tv-series-episode-list-item--active").getAttribute("href");
+    const uri = document.querySelector("a.tv-series-episode-list-item--selected").getAttribute("href");
     if (!uri.split('/')[3] || uri.split('/')[3] !== 'sesong') {
       Rollbar.error("Unexpected URL-format", uri);
       return;

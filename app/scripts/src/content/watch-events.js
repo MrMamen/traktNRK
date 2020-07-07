@@ -79,9 +79,9 @@ WatchEvents.prototype = {
   },
 
   isPlaying: function() {
-    const playIcon = document.getElementsByClassName("ludo-playicon")[0];
-    if (playIcon) {
-      return (/ludo-playicon--pause/.test(playIcon.className));
+    const playIcons = document.getElementsByClassName("ludo-playicon");
+    if (playIcons.length) {
+      return (/ludo-playicon--pause/.test(playIcons[playIcons.length-1].className));
     };
     return false;
   }
